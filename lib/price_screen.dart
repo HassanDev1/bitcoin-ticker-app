@@ -1,10 +1,13 @@
-import 'dart:io';
-
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'coin_data.dart';
+import 'coin_data.dart' ;
 
 
+
+
+CoinData coinData = CoinData();
+ 
 class PriceScreen extends StatefulWidget {
   @override
   _PriceScreenState createState() => _PriceScreenState();
@@ -50,9 +53,22 @@ class _PriceScreenState extends State<PriceScreen> {
               children: result
     );
   }
+  String bitCoinInUsd = "?";
+
+  getData() async{
+    double data = await coinData.getCoinData();
+    setState(() {
+      bitCoinInUsd = data.toStringAsFixed(0);
+    });
+  }
+  @override
+  void initState() {
+     getData();
+    super.initState();
+  }
+ 
   @override
   Widget build(BuildContext context) {
-    getDropDownItems();
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
@@ -72,7 +88,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ? USD',
+                  'BTCUSD $bitCoinInUsd USD',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
@@ -88,7 +104,6 @@ class _PriceScreenState extends State<PriceScreen> {
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
             child:Platform.isIOS?getPickerItems():getDropDownItems(),
-            
           ),
         ],
       ),
