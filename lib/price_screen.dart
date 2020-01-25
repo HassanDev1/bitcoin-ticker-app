@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'coin_data.dart';
@@ -11,7 +13,7 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurreny = "USD";
 
-  List<DropdownMenuItem<String>> getDropDownItems(){
+   Widget getDropDownItems(){
     List <DropdownMenuItem<String>> result = [];
     for (String list in currenciesList){
      var dropDownMenu = DropdownMenuItem(
@@ -20,17 +22,33 @@ class _PriceScreenState extends State<PriceScreen> {
       );
       result.add(dropDownMenu);
     }
-    return result;
+     return DropdownButton(
+              value: selectedCurreny,
+              items: result,
+              onChanged: (value){
+                setState(() {
+                  selectedCurreny = value;
+                }
+                );
+              },
+            );
    
   }
-  List<Widget> getPickerItems(){
+  Widget getPickerItems(){
      List<Text> result = [];
     for (String currency in currenciesList){
       var newitems = Text(currency);
       result.add(newitems);
 
     }
-    return result;
+    return CupertinoPicker(
+              backgroundColor: Colors.lightBlue,
+              itemExtent: 32.0,
+              onSelectedItemChanged: (selectedIndex){
+               
+              },
+              children: result
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -69,14 +87,8 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child:CupertinoPicker(
-              backgroundColor: Colors.lightBlue,
-              itemExtent: 32.0,
-              onSelectedItemChanged: (selectedIndex){
-               
-              },
-              children: getPickerItems()
-            )
+            child:Platform.isIOS?getPickerItems():getDropDownItems(),
+            
           ),
         ],
       ),
@@ -85,13 +97,3 @@ class _PriceScreenState extends State<PriceScreen> {
 }
 
 
-//  DropdownButton(
-//               value: selectedCurreny,
-//               items: getDropDownItems(),
-//               onChanged: (value){
-//                 setState(() {
-//                   selectedCurreny = value;
-//                 }
-//                 );
-//               },
-//             ),
