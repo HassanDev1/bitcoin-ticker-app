@@ -9,6 +9,7 @@ import 'coin_data.dart' ;
 
 
 
+
  
 class PriceScreen extends StatefulWidget {
   @override
@@ -43,7 +44,6 @@ CoinData coinData = CoinData();
                 setState(() {
                   selectedCurreny = value;
                   getData();
-                  
                 }
                 );
               },
@@ -61,7 +61,8 @@ CoinData coinData = CoinData();
               backgroundColor: Colors.lightBlue,
               itemExtent: 32.0,
               onSelectedItemChanged: (selectedIndex){
-               
+                selectedCurreny = currenciesList[selectedIndex];
+                getData();
               },
               children: result
     );
@@ -115,7 +116,7 @@ CoinData coinData = CoinData();
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child:Platform.isIOS?getPickerItems():getDropDownItems(),
+            child:getPickerItems(),
           ),
         ],
       ),
@@ -124,3 +125,5 @@ CoinData coinData = CoinData();
 }
 
 
+// Platform.isIOS?
+// :getDropDownItems()
