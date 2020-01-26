@@ -32,10 +32,9 @@ const List<String> cryptoList = [
 ];
 
 class CoinData {
-  
-
-   Future getCoinData()async{
-     Response response = await get("https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD");
+  String url ="https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC";
+   Future getCoinData(String currency)async{
+     Response response = await get(url+currency);
      if(response.statusCode == 200){
        var data = jsonDecode(response.body);
        return(data['last']);

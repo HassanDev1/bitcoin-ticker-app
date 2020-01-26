@@ -6,16 +6,27 @@ import 'coin_data.dart' ;
 
 
 
-CoinData coinData = CoinData();
+
+
+
  
 class PriceScreen extends StatefulWidget {
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
-
+ String selectedCurreny = "USD";
 class _PriceScreenState extends State<PriceScreen> {
-  String selectedCurreny = "USD";
-
+ 
+ 
+CoinData coinData = CoinData();
+  
+ @override
+  void initState() {
+  
+     getData();
+     
+    super.initState();
+  }
    Widget getDropDownItems(){
     List <DropdownMenuItem<String>> result = [];
     for (String list in currenciesList){
@@ -31,6 +42,8 @@ class _PriceScreenState extends State<PriceScreen> {
               onChanged: (value){
                 setState(() {
                   selectedCurreny = value;
+                  getData();
+                  
                 }
                 );
               },
@@ -56,19 +69,18 @@ class _PriceScreenState extends State<PriceScreen> {
   String bitCoinInUsd = "?";
 
   getData() async{
-    double data = await coinData.getCoinData();
+    double data = await coinData.getCoinData(selectedCurreny);
     setState(() {
       bitCoinInUsd = data.toStringAsFixed(0);
+      
+      
     });
   }
-  @override
-  void initState() {
-     getData();
-    super.initState();
-  }
+ 
  
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
@@ -88,7 +100,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  'BTCUSD $bitCoinInUsd USD',
+                  'BTC $bitCoinInUsd $selectedCurreny',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
