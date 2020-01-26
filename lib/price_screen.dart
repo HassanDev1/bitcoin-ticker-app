@@ -77,6 +77,7 @@ CoinData coinData = CoinData();
       
     });
   }
+
  
  
   @override
@@ -90,7 +91,9 @@ CoinData coinData = CoinData();
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [Padding(
             padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
             child: Card(
               color: Colors.lightBlueAccent,
@@ -110,6 +113,51 @@ CoinData coinData = CoinData();
                 ),
               ),
             ),
+          ),
+         
+          Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0),          
+            child: Card(
+              color: Colors.lightBlueAccent,
+              elevation: 0.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                child: Text(
+                  'ETH $bitCoinInUsd $selectedCurreny',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+            child: Card(
+              color: Colors.lightBlueAccent,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                child: Text(
+                  'LTC $bitCoinInUsd $selectedCurreny',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          ]
           ),
           Container(
             height: 150.0,
