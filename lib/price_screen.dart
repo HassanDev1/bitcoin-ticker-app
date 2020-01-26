@@ -116,7 +116,7 @@ CoinData coinData = CoinData();
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child:getPickerItems(),
+            child:Platform.isIOS?getPickerItems():getDropDownItems(),
           ),
         ],
       ),
@@ -125,5 +125,4 @@ CoinData coinData = CoinData();
 }
 
 
-// Platform.isIOS?
-// :getDropDownItems()
+
